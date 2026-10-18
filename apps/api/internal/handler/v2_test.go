@@ -270,8 +270,11 @@ func TestV2CoversEveryV1Route(t *testing.T) {
 		"GET /api/v1/dlq":                                  true,
 		"POST /api/v1/dlq/{id}/requeue":                    true,
 		"GET /api/v1/contracts/{id}/summary":               true,
-		"GET /api/v1/contracts/{id}/snapshot.json":         true,
-		"GET /api/v1/stream/events":                        true,
+		// Invocation resource aggregates (#531) are a v1 endpoint; latency
+		// percentiles are tracked separately and are not part of this route.
+		"GET /api/v1/contracts/{id}/invocations/stats": true,
+		"GET /api/v1/contracts/{id}/snapshot.json":     true,
+		"GET /api/v1/stream/events":                    true,
 		// WebSocket stream (issue #126): no v2 twin yet.
 		"GET /api/v1/subscribe":              true,
 		"GET /api/v1/watchdog/subscriptions": true,
